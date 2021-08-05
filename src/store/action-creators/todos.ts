@@ -8,7 +8,7 @@ export const fetchTodos = (page: number) => {
         try {
             dispatch({type: TodosActionTypes.FETCH_TODOS})
             const response = await TodosService.fetchTodos(page)
-            dispatch({type: TodosActionTypes.SET_TODOS_SUCCESS, payload: response.data.todos})
+            dispatch({type: TodosActionTypes.SET_TODOS_SUCCESS, payload: {...response.data}})
             console.log(response)
         } catch (e) {
             dispatch({

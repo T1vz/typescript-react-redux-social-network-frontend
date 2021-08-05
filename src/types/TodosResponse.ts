@@ -1,7 +1,8 @@
 import {Todo} from "./Todo";
 
 export interface TodosResponse {
-    todos: Todo[]
+    todos: Todo[],
+    hasMore: boolean
 }
 
 export interface AddTodoResponse {

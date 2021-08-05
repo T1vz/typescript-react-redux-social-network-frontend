@@ -5,7 +5,8 @@ let initialState: TodosState = {
     error: null,
     todos: [],
     isLoading: false,
-    page: 1
+    page: 1,
+    hasMore: true
 }
 
 const todosReducer = (state = initialState, action: TodosAction): TodosState => {
@@ -24,9 +25,11 @@ const todosReducer = (state = initialState, action: TodosAction): TodosState => 
         case TodosActionTypes.SET_TODOS_SUCCESS:
             return {
                 ...state,
-                todos: action.payload,
+                todos: [...state.todos, ...action.payload.todos],
+                hasMore: action.payload.hasMore,
                 error: null,
-                isLoading: false
+                isLoading: false,
+                page: state.page + 1
             }
         case TodosActionTypes.ADD_TODO_SUCCESS:
             return {

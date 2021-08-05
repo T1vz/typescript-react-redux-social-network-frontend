@@ -4,7 +4,8 @@ export interface TodosState {
     todos: Todo[]
     error: string | null
     isLoading: boolean
-    page: number
+    page: number,
+    hasMore: boolean
 }
 
 export enum TodosActionTypes {
@@ -23,7 +24,10 @@ interface FetchTodosAction {
 
 interface SetTodosSuccessAction {
     type: TodosActionTypes.SET_TODOS_SUCCESS
-    payload: Todo[]
+    payload: {
+        todos: Todo[],
+        hasMore: boolean
+    }
 }
 
 interface AddTodoSuccessAction {

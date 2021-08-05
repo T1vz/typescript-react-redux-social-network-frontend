@@ -1,16 +1,12 @@
-import React, {FC, useEffect, useState} from 'react'
+import React, {FC, useEffect} from 'react'
 import {useActions} from "../hooks/useActions";
-import {fetchTodos} from "../store/action-creators/todos";
 import {useTypedSelector} from "../hooks/useTypedSelection";
 import TodosList from "../components/TodosPage/TodosList";
+import TodoAdd from "../components/TodosPage/TodoAdd";
 
 const TodosPage: FC = () => {
-    const {addTodo} = useActions()
+    const {fetchTodos} = useActions()
     const {page} = useTypedSelector(state => state.todos)
-
-    const timeInMs: Date = new Date(Date.now());
-
-    const [newTodo, setNewTodo] = useState<string>('')
 
     useEffect(() => {
         fetchTodos(page)
@@ -18,15 +14,8 @@ const TodosPage: FC = () => {
 
     return (
         <div>
+            <TodoAdd/>
             <TodosList/>
-            <div>
-                <input value={newTodo} onChange={(e) => setNewTodo(e.target.value)}/>
-                <button onClick={() => {
-                    setNewTodo('')
-                    addTodo(null, newTodo, timeInMs)
-                }}>Add Todo
-                </button>
-            </div>
         </div>
     )
 }
